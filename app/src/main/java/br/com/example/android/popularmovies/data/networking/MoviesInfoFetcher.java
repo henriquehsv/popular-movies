@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import br.com.example.android.popularmovies.BuildConfig;
 import br.com.example.android.popularmovies.data.model.Movie;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,7 +20,6 @@ public class MoviesInfoFetcher {
     private static final String BASE_URL = "http://api.themoviedb.org";
     private static final String POPULAR_MOVIES_PATH = "/3/movie/popular";
     private static final String API_KEY_PARAMETER = "api_key";
-    public static final String MOVIES_DB_KEY = "movies.db.key";
     private static final String TAG = MoviesInfoFetcher.class.getName();
     public static final String FILE_NAME_PROPERTIES = "local.properties";
 
@@ -71,17 +71,12 @@ public class MoviesInfoFetcher {
                 }
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
     }
 
     private String getPopularMoviesURL() throws IOException {
-        Properties properties = new Properties();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FILE_NAME_PROPERTIES);
-        properties.load(inputStream);
-
         Uri.Builder builder = Uri.parse(BASE_URL).buildUpon();
         builder.appendEncodedPath(POPULAR_MOVIES_PATH);
-        builder.appendQueryParameter(API_KEY_PARAMETER, properties.getProperty(MOVIES_DB_KEY));
+        builder.appendQueryParameter(API_KEY_PARAMETER, BuildConfig.MOVIES_DB_API_KEY);
 
         return builder.build().toString();
     }
@@ -91,5 +86,4 @@ public class MoviesInfoFetcher {
 
         void onError();
     }
-
 }

@@ -17,6 +17,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        buildTypes.each {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+            it.buildConfigField 'String', 'MOVIES_DB_API_KEY', properties.getProperty('movies.db.key')
+        }
     }
 }
 
