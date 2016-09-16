@@ -4,9 +4,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -21,7 +26,8 @@ public class MoviesInfoFetcher {
     private static final String POPULAR_MOVIES_PATH = "/3/movie/popular";
     private static final String API_KEY_PARAMETER = "api_key";
     private static final String TAG = MoviesInfoFetcher.class.getName();
-    public static final String FILE_NAME_PROPERTIES = "local.properties";
+
+    public static final String BASE_POSTER_URL = "http://image.tmdb.org/t/p/w500/";
 
     private static MoviesInfoFetcher instance;
 
@@ -53,8 +59,11 @@ public class MoviesInfoFetcher {
                     String body = response.body().string();
 
                     Log.d(TAG, "doInBackground: " + body);
+                    Gson gson = new Gson();
 
-                    movies = new ArrayList<>();
+                    JsonObject jsonResponse = gson.fromJson(body, JsonObject.class);
+
+                    movies = Arrays.asList(gson.fromJson(jsonResponse.getAsJsonArray("results"), Movie[].class));
                 } catch (IOException e) {
                     Log.e(TAG, "doInBackground: ", e);
                 }

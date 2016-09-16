@@ -2,7 +2,10 @@ package br.com.example.android.popularmovies.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,8 +30,7 @@ import butterknife.ButterKnife;
 public class MoviesFragment extends Fragment {
     private MoviePosterAdapter moviePosterAdapter;
 
-    @BindView(R.id.movieGrid)
-    RecyclerView movieGrid;
+    @BindView(R.id.movieGrid) RecyclerView movieGrid;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,17 +41,20 @@ public class MoviesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, rootView);
 
+        StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+
+        movieGrid.setLayoutManager(layout);
         movieGrid.setAdapter(moviePosterAdapter);
 
         MoviesInfoFetcher.getInstance().getPopularMovies(new MoviesInfoFetcher.OnMoviesFetchedListener() {
             @Override
             public void onMoviesFetched(List<Movie> movies) {
-
+                moviePosterAdapter.setMovies(movies);
+                moviePosterAdapter.notifyDataSetChanged();
             }
 
             @Override
