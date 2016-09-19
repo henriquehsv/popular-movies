@@ -28,6 +28,7 @@ public class MoviesInfoFetcher {
     private static final String TAG = MoviesInfoFetcher.class.getName();
 
     public static final String BASE_POSTER_URL = "http://image.tmdb.org/t/p/w500/";
+    public static final String MOVIE_ARRAY_PARAMETER = "results";
 
     private static MoviesInfoFetcher instance;
 
@@ -63,7 +64,7 @@ public class MoviesInfoFetcher {
 
                     JsonObject jsonResponse = gson.fromJson(body, JsonObject.class);
 
-                    movies = Arrays.asList(gson.fromJson(jsonResponse.getAsJsonArray("results"), Movie[].class));
+                    movies = Arrays.asList(gson.fromJson(jsonResponse.getAsJsonArray(MOVIE_ARRAY_PARAMETER), Movie[].class));
                 } catch (IOException e) {
                     Log.e(TAG, "doInBackground: ", e);
                 }

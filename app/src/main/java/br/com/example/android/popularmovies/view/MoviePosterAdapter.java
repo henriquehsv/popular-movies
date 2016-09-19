@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -38,7 +40,12 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        picasso.load(MoviesInfoFetcher.BASE_POSTER_URL + movies.get(position).getPosterUrl())
+        Movie movie = movies.get(position);
+        holder.movieDescription.setText(movie.getDescription());
+        holder.movieTitle.setText(movie.getTitle());
+        holder.movieRating.setText(movie.getRating().toPlainString());
+
+        picasso.load(MoviesInfoFetcher.BASE_POSTER_URL + movie.getPosterUrl())
                .into(holder.moviePoster);
     }
 
@@ -53,7 +60,17 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.moviePoster) ImageView moviePoster;
+        @BindView(R.id.moviePoster)
+        ImageView moviePoster;
+
+        @BindView(R.id.movieTitle)
+        TextView movieTitle;
+
+        @BindView(R.id.movieDescription)
+        TextView movieDescription;
+
+        @BindView(R.id.movieRating)
+        TextView movieRating;
 
         public ViewHolder(View itemView) {
             super(itemView);
