@@ -45,7 +45,8 @@ public class MoviesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, rootView);
 
-        StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        int columnAmount = getResources().getInteger(R.integer.column_amount);
+        StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(columnAmount, StaggeredGridLayoutManager.VERTICAL);
 
         movieGrid.setLayoutManager(layout);
         movieGrid.setAdapter(moviePosterAdapter);

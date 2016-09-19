@@ -19,11 +19,13 @@ import butterknife.ButterKnife;
 
 public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.ViewHolder> {
     private final Context context;
+    private final Picasso picasso;
     private List<Movie> movies;
 
     public MoviePosterAdapter(Context context, List<Movie> movies) {
         this.context = context;
         this.movies = movies;
+        picasso = Picasso.with(context);
     }
 
     @Override
@@ -36,8 +38,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Picasso.with(context)
-               .load(MoviesInfoFetcher.BASE_POSTER_URL + movies.get(position).getPosterUrl())
+        picasso.load(MoviesInfoFetcher.BASE_POSTER_URL + movies.get(position).getPosterUrl())
                .into(holder.moviePoster);
     }
 
@@ -52,8 +53,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.moviePoster)
-        ImageView moviePoster;
+        @BindView(R.id.moviePoster) ImageView moviePoster;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -65,5 +65,4 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
-
 }
