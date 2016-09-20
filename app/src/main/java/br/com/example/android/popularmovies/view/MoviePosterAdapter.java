@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.Collections;
 import java.util.List;
 
 import br.com.example.android.popularmovies.R;
@@ -14,20 +15,20 @@ import br.com.example.android.popularmovies.model.data.Movie;
 import br.com.example.android.popularmovies.viewmodel.MovieViewModel;
 
 public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.ViewHolder> {
-    private final Context context;
     private List<Movie> movies;
 
-    public MoviePosterAdapter(Context context, List<Movie> movies) {
-        this.context = context;
-        this.movies = movies;
+    public MoviePosterAdapter() {
+        movies = Collections.emptyList();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         //The name of this variable is based on the layout name
-        MovieItemBinding movieItemBinding = DataBindingUtil.inflate(inflater, R.layout.movie_item, parent, false);
+        MovieItemBinding movieItemBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.movie_item,
+                parent,
+                false);
 
         return new ViewHolder(movieItemBinding);
     }
