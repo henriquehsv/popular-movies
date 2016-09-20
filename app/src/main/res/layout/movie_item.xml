@@ -1,87 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="7dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp">
 
-    <RelativeLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <data>
+        <variable name="movie" type="br.com.example.android.popularmovies.viewmodel.MovieViewModel"/>
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/moviePoster"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/movie_poster_height"
-            android:scaleType="centerCrop"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
 
         <RelativeLayout
-            android:layout_below="@id/moviePoster"
-            android:id="@+id/movieDetails"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/movieBackgroundColor"
-            android:elevation="20dp"
-            android:padding="8dp"
-            >
-
-            <TextView
-                android:id="@+id/movieTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:ellipsize="end"
-                android:lines="1"
-                android:textStyle="bold"
-                android:layout_toLeftOf="@+id/movieRating"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:textColor="@color/movieDescriptionColor"
-                android:layout_alignTop="@id/movieRating"
-                android:layout_alignBottom="@id/movieRating"
-                />
-
-            <TextView
-                android:id="@+id/movieDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/movieTitle"
-                android:ellipsize="end"
-                android:lines="2"
-                android:paddingTop="5dp"
-                android:textColor="@color/movieDescriptionColor"
-                />
-
-            <TextView
-                android:id="@id/movieRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/starImage"
-                android:paddingRight="5dp"
-                android:textColor="@color/movieDescriptionColor"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@id/starImage"
-                android:layout_width="wrap_content"
+                android:id="@+id/moviePoster"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/movie_poster_height"
+                app:loadImage="@{movie.posterUrl}"
+                android:scaleType="centerCrop"/>
+
+            <RelativeLayout
+                android:id="@+id/movieDetails"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_star_black_24dp"
-                android:tint="@color/movieDescriptionColor"
-                android:layout_alignTop="@id/movieRating"
-                android:layout_alignBottom="@id/movieRating"
-                />
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/moviePoster"
+                android:background="@color/movieBackgroundColor"
+                android:elevation="20dp"
+                android:padding="8dp"
+                >
 
+                <TextView
+                    android:id="@+id/movieTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/movieRating"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignTop="@id/movieRating"
+                    android:layout_toLeftOf="@id/movieRating"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                    android:textColor="@color/movieDescriptionColor"
+                    android:textStyle="bold"
+                    android:text="@{movie.title}"
+                    />
+
+                <TextView
+                    android:id="@+id/movieDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/movieTitle"
+                    android:ellipsize="end"
+                    android:lines="2"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/movieDescriptionColor"
+                    android:text="@{movie.description}"
+                    />
+
+                <TextView
+                    android:id="@id/movieRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/starImage"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/movieDescriptionColor"
+                    android:textSize="20sp"
+                    android:text="@{movie.rating}"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@id/starImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/movieRating"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/movieRating"
+                    android:src="@drawable/ic_star_black_24dp"
+                    android:tint="@color/movieDescriptionColor"
+                    />
+
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
 
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
+</layout>

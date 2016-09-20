@@ -2,8 +2,6 @@ package br.com.example.android.popularmovies.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -12,15 +10,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.example.android.popularmovies.R;
-import br.com.example.android.popularmovies.data.model.Movie;
-import br.com.example.android.popularmovies.data.networking.MoviesInfoFetcher;
+import br.com.example.android.popularmovies.model.data.Movie;
+import br.com.example.android.popularmovies.model.networking.MoviesDBInfoFetcher;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -51,7 +48,7 @@ public class MoviesFragment extends Fragment {
         movieGrid.setLayoutManager(layout);
         movieGrid.setAdapter(moviePosterAdapter);
 
-        MoviesInfoFetcher.getInstance().getPopularMovies(new MoviesInfoFetcher.OnMoviesFetchedListener() {
+        MoviesDBInfoFetcher.getInstance().getPopularMovies(new MoviesDBInfoFetcher.OnMoviesFetchedListener() {
             @Override
             public void onMoviesFetched(List<Movie> movies) {
                 moviePosterAdapter.setMovies(movies);
