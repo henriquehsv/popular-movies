@@ -11,7 +11,7 @@ import br.com.example.android.popularmovies.model.data.Movie;
 public class MovieViewModel extends BaseObservable {
     private Movie movie;
 
-    public MovieViewModel(Movie movie) {
+    public void setMovie(Movie movie) {
         this.movie = movie;
     }
 

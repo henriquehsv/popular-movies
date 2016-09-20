@@ -35,7 +35,15 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         MovieItemBinding movieItemBinding = holder.binding;
-        movieItemBinding.setMovie(new MovieViewModel(movies.get(position)));
+
+        MovieViewModel movieViewModel = movieItemBinding.getViewModel();
+
+        if (movieViewModel == null) {
+            movieViewModel = new MovieViewModel();
+        }
+
+        movieViewModel.setMovie(movies.get(position));
+        movieItemBinding.setViewModel(movieViewModel);
     }
 
     @Override

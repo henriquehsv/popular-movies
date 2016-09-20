@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <data>
-        <variable name="movie" type="br.com.example.android.popularmovies.viewmodel.MovieViewModel"/>
+        <variable name="viewModel" type="br.com.example.android.popularmovies.viewmodel.MovieViewModel"/>
     </data>
 
     <android.support.v7.widget.CardView
@@ -23,7 +23,7 @@
                 android:id="@+id/moviePoster"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/movie_poster_height"
-                app:loadImage="@{movie.posterUrl}"
+                app:loadImage="@{viewModel.posterUrl}"
                 android:scaleType="centerCrop"/>
 
             <RelativeLayout
@@ -52,7 +52,7 @@
                     android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:textColor="@color/movieDescriptionColor"
                     android:textStyle="bold"
-                    android:text="@{movie.title}"
+                    android:text="@{viewModel.title}"
                     />
 
                 <TextView
@@ -66,7 +66,7 @@
                     android:lines="2"
                     android:paddingTop="5dp"
                     android:textColor="@color/movieDescriptionColor"
-                    android:text="@{movie.description}"
+                    android:text="@{viewModel.description}"
                     />
 
                 <TextView
@@ -78,7 +78,7 @@
                     android:paddingRight="5dp"
                     android:textColor="@color/movieDescriptionColor"
                     android:textSize="20sp"
-                    android:text="@{movie.rating}"
+                    android:text="@{viewModel.rating}"
                     android:textStyle="bold"/>
 
                 <ImageView
