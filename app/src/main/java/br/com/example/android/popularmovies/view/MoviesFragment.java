@@ -1,9 +1,9 @@
 package br.com.example.android.popularmovies.view;
 
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -12,62 +12,46 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.example.android.popularmovies.R;
-import br.com.example.android.popularmovies.data.model.Movie;
-import br.com.example.android.popularmovies.data.networking.MoviesInfoFetcher;
+import br.com.example.android.popularmovies.databinding.FragmentMainBinding;
+import br.com.example.android.popularmovies.model.data.Movie;
+import br.com.example.android.popularmovies.viewmodel.MainScreenViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * A placeholder fragment containing a simple view.
- */
-public class MoviesFragment extends Fragment {
-    private MoviePosterAdapter moviePosterAdapter;
-
-    @BindView(R.id.movieGrid) RecyclerView movieGrid;
+public class MoviesFragment extends Fragment implements MainScreenViewModel.DataListener {
+    private MainScreenViewModel mainScreenViewModel;
+    private FragmentMainBinding fragmentMainBinding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        moviePosterAdapter = new MoviePosterAdapter(getContext(), new ArrayList<Movie>());
+        mainScreenViewModel = new MainScreenViewModel(this);
 
         setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        ButterKnife.bind(this, rootView);
+        fragmentMainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
 
-        StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        RecyclerView movieGrid = fragmentMainBinding.movieGrid;
+        int columnAmount = getResources().getInteger(R.integer.column_amount);
+        StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(columnAmount, StaggeredGridLayoutManager.VERTICAL);
 
         movieGrid.setLayoutManager(layout);
-        movieGrid.setAdapter(moviePosterAdapter);
+        movieGrid.setAdapter(new MoviePosterAdapter());
 
-        MoviesInfoFetcher.getInstance().getPopularMovies(new MoviesInfoFetcher.OnMoviesFetchedListener() {
-            @Override
-            public void onMoviesFetched(List<Movie> movies) {
-                moviePosterAdapter.setMovies(movies);
-                moviePosterAdapter.notifyDataSetChanged();
-            }
+        fragmentMainBinding.setViewModel(mainScreenViewModel);
 
-            @Override
-            public void onError() {
-                if (getActivity() == null) {
-                    return;
-                }
+        mainScreenViewModel.onCreate();
 
-                Toast.makeText(getContext(), getString(R.string.unable_to_recover_movies), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        return rootView;
+        return fragmentMainBinding.getRoot();
     }
 
     @Override
@@ -89,5 +73,17 @@ public class MoviesFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    @Override
+    public void updateMovies(List<Movie> movies) {
+        MoviePosterAdapter adapter = (MoviePosterAdapter) fragmentMainBinding.movieGrid.getAdapter();
+        adapter.setMovies(movies);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showErrorMessage() {
+        Toast.makeText(getContext(), getString(R.string.unable_to_recover_movies), Toast.LENGTH_LONG).show();
     }
 }
