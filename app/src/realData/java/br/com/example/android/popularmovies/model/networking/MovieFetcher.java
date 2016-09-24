@@ -12,11 +12,9 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.google.gson.annotations.SerializedName;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,29 +24,29 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MoviesDBInfoFetcher {
+public class MovieFetcher {
     private static final String BASE_URL = "http://api.themoviedb.org";
     private static final String POPULAR_MOVIES_PATH = "/3/movie/popular";
     private static final String API_KEY_PARAMETER = "api_key";
-    private static final String TAG = MoviesDBInfoFetcher.class.getName();
+    private static final String TAG = MovieFetcher.class.getName();
 
     private static final String BASE_POSTER_URL = "http://image.tmdb.org/t/p/w500/";
     public static final String MOVIE_ARRAY_PARAMETER = "results";
 
-    private static MoviesDBInfoFetcher instance;
+    private static MovieFetcher instance;
 
-    private MoviesDBInfoFetcher() {
+    private MovieFetcher() {
     }
 
-    public static MoviesDBInfoFetcher getInstance() {
+    protected static MovieFetcher getInstance() {
         if (instance == null) {
-            instance = new MoviesDBInfoFetcher();
+            instance = new MovieFetcher();
         }
 
         return instance;
     }
 
-    public void getPopularMovies(final OnMoviesFetchedListener onMoviesFetchedListener) {
+    public void fetchMovies(final OnMoviesFetchedListener moviesFetchedListener) {
         new AsyncTask<Void, Void, List<Movie>>() {
 
             @Override
@@ -84,9 +82,9 @@ public class MoviesDBInfoFetcher {
             @Override
             protected void onPostExecute(List<Movie> movies) {
                 if (movies != null) {
-                    onMoviesFetchedListener.onMoviesFetched(movies);
+                    moviesFetchedListener.onMoviesFetched(movies);
                 } else {
-                    onMoviesFetchedListener.onError();
+                    moviesFetchedListener.onError();
                 }
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
