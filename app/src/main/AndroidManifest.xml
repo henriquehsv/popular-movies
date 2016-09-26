@@ -23,6 +23,7 @@
         <activity
             android:name=".view.MovieDetailsActivity"
             android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

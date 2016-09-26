@@ -1,12 +1,17 @@
 package br.com.example.android.popularmovies.viewmodel;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.BindingAdapter;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
 import br.com.example.android.popularmovies.model.data.Movie;
+import br.com.example.android.popularmovies.view.MovieDetailsActivity;
 
 public class MovieViewModel extends BaseObservable {
     private Movie movie;
@@ -29,6 +34,16 @@ public class MovieViewModel extends BaseObservable {
 
     public String getDescription() {
         return movie.getDescription();
+    }
+
+    public void onMovieClick(View view) {
+        Context context = view.getContext();
+
+        Intent detailsIntent = new Intent();
+        detailsIntent.setClass(context, MovieDetailsActivity.class);
+        detailsIntent.putExtra(MovieDetailsActivity.MOVIE_EXTRA, movie);
+
+        context.startActivity(detailsIntent);
     }
 
     /**
