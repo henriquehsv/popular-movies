@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import br.com.example.android.popularmovies.R;
 import br.com.example.android.popularmovies.databinding.ActivityMovieDetailsBinding;
 import br.com.example.android.popularmovies.model.data.Movie;
+import br.com.example.android.popularmovies.viewmodel.MovieLayoutViewModel;
 import br.com.example.android.popularmovies.viewmodel.MovieViewModel;
 
 public class MovieDetailsActivity extends AppCompatActivity {
@@ -19,7 +20,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         ActivityMovieDetailsBinding viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = viewDataBinding.toolbar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -27,6 +28,17 @@ public class MovieDetailsActivity extends AppCompatActivity {
         MovieViewModel movieViewModel = new MovieViewModel();
         movieViewModel.setMovie(movie);
 
+        MovieLayoutViewModel movieLayoutViewModel = new MovieLayoutViewModel();
+
+        int textColor = getResources().getColor(R.color.movieBackgroundColor);
+        movieLayoutViewModel.setTextColor(textColor);
+
+        int backgroundColor = getResources().getColor(R.color.colorPrimary);
+        movieLayoutViewModel.setBackgroundColor(backgroundColor);
+
+        movieLayoutViewModel.setNumberOfLines(10);
+
         viewDataBinding.setViewModel(movieViewModel);
+        viewDataBinding.setLayoutViewModel(movieLayoutViewModel);
     }
 }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="br.com.example.android.popularmovies.viewmodel.MovieViewModel"/>
+        <variable
+            name="layoutViewModel"
+            type="br.com.example.android.popularmovies.viewmodel.MovieLayoutViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/movieDetails"
+        android:padding="8dp"
+        android:background="@{layoutViewModel.backgroundColor}"
+        tools:showIn="@layout/activity_movie_details">
+
+        <TextView
+            android:id="@+id/movieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/movieRating"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignTop="@id/movieRating"
+            android:layout_toLeftOf="@id/movieRating"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@{viewModel.title}"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="@{layoutViewModel.textColor}"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/movieDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/movieTitle"
+            android:ellipsize="end"
+            android:maxLines="@{layoutViewModel.numberOfLines}"
+            android:paddingTop="5dp"
+            android:text="@{viewModel.description}"
+            android:textColor="@{layoutViewModel.textColor}"
+            />
+
+        <TextView
+            android:id="@id/movieRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/starImage"
+            android:paddingRight="5dp"
+            android:text="@{viewModel.rating}"
+            android:textColor="@{layoutViewModel.textColor}"
+            android:textSize="@dimen/large_text_size"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@id/starImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/movieRating"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/movieRating"
+            android:src="@drawable/ic_star_black_24dp"
+            android:tint="@{layoutViewModel.textColor}"
+            />
+    </RelativeLayout>
+</layout>
