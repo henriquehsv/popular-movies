@@ -1,6 +1,5 @@
 package br.com.example.android.popularmovies.view;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
