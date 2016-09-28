@@ -1,0 +1,11 @@
+Espresso testing
+https://developer.android.com/training/testing/ui-testing/espresso-testing.html
+
+Gradle setup
+https://google.github.io/android-testing-support-library/docs/espresso/setup/index.html
+
+MockWebServer
+https://github.com/square/okhttp/tree/master/mockwebserver
+
+Material Design Palette
+https://www.materialpalette.com/
