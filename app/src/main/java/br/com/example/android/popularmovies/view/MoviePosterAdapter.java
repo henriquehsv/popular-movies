@@ -1,7 +1,7 @@
 package br.com.example.android.popularmovies.view;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -34,11 +34,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //The name of this class is based on the layout name
-        MovieItemBinding movieItemBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.getContext()),
-                R.layout.movie_item,
-                parent,
-                false);
+        MovieItemBinding movieItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.movie_item, parent, false);
 
         return new ViewHolder(movieItemBinding);
     }
