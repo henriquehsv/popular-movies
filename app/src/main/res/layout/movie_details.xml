@@ -16,6 +16,7 @@
 
     <RelativeLayout
         android:id="@+id/movieDetails"
+        android:transitionName="@string/movie_details_transition"
         android:padding="8dp"
         android:background="@{layoutViewModel.backgroundColor}"
         tools:showIn="@layout/activity_movie_details">

@@ -42,6 +42,7 @@
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
+                    android:transitionName="@string/movie_poster_transition"
                     app:loadImage="@{viewModel.posterUrl}"/>
 
                 <android.support.v7.widget.Toolbar
