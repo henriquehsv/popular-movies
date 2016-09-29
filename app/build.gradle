@@ -19,17 +19,24 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
 
-        buildTypes.each {
+    productFlavors {
+        //This flavor is used to recover data from the movies DB API
+        //If you want to recover real data from the Web, go to https://www.themoviedb.org/ and create yours.
+        //Your API key should be on your local.properties gradle file under the name movies.db.key
+        realData {
             Properties properties = new Properties()
             properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-            it.buildConfigField 'String', 'MOVIES_DB_API_KEY', properties.getProperty('movies.db.key')
+            String moviesDBKey = properties.getProperty('movies.db.key');
+            if (moviesDBKey == null) {
+                moviesDBKey = ""
+            }
+
+            it.buildConfigField 'String', 'MOVIES_DB_API_KEY', moviesDBKey
         }
-    }
-    productFlavors {
-        realData{}
-        mockData{}
+        mockData {}
     }
 }
 

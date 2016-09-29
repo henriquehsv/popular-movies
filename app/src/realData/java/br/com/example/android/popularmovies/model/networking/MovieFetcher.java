@@ -20,6 +20,7 @@ import java.util.List;
 
 import br.com.example.android.popularmovies.BuildConfig;
 import br.com.example.android.popularmovies.model.data.Movie;
+import br.com.example.android.popularmovies.model.data.OnMoviesFetchedListener;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -38,7 +39,7 @@ public class MovieFetcher {
     private MovieFetcher() {
     }
 
-    protected static MovieFetcher getInstance() {
+    public static MovieFetcher getInstance() {
         if (instance == null) {
             instance = new MovieFetcher();
         }
@@ -96,12 +97,6 @@ public class MovieFetcher {
         builder.appendQueryParameter(API_KEY_PARAMETER, BuildConfig.MOVIES_DB_API_KEY);
 
         return builder.build().toString();
-    }
-
-    public interface OnMoviesFetchedListener {
-        void onMoviesFetched(List<Movie> movies);
-
-        void onError();
     }
 
     private class MovieDeserializer implements JsonDeserializer<Movie> {
