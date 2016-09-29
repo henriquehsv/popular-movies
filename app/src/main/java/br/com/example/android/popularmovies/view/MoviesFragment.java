@@ -45,7 +45,7 @@ public class MoviesFragment extends Fragment implements MainScreenViewModel.Data
         StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(columnAmount, StaggeredGridLayoutManager.VERTICAL);
 
         movieGrid.setLayoutManager(layout);
-        movieGrid.setAdapter(new MoviePosterAdapter());
+        movieGrid.setAdapter(new MoviePosterAdapter(getContext()));
 
         fragmentMainBinding.setViewModel(mainScreenViewModel);
 
