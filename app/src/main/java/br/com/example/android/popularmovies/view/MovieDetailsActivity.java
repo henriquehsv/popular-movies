@@ -23,6 +23,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = viewDataBinding.toolbar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(null);
 
         Movie movie = getIntent().getParcelableExtra(MOVIE_EXTRA);
         MovieViewModel movieViewModel = new MovieViewModel();
