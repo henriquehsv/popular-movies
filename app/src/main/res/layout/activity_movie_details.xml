@@ -34,8 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentScrim="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:scrimVisibleHeightTrigger="?attr/actionBarSize">
+                app:expandedTitleGravity="top"
+                app:titleEnabled="false"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
                 <ImageView
                     android:id="@+id/moviePoster"
@@ -48,6 +49,15 @@
                     android:transitionName="@string/movie_poster_transition"
                     app:loadImage="@{viewModel.posterUrl}"/>
 
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="top"
+                    app:layout_collapseMode="pin"
+                    android:title="@{viewModel.title}"
+                    />
+
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
 
@@ -57,22 +67,20 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
 
-            <include
-                layout="@layout/movie_details"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                app:layoutViewModel="@{layoutViewModel}"
-                app:viewModel="@{viewModel}"
-                />
+            <TextView
+                android:padding="8dp"
+                android:id="@+id/movieDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:ellipsize="end"
+                android:background="@{layoutViewModel.backgroundColor}"
+                android:maxLines="@{layoutViewModel.numberOfLines}"
+                android:paddingTop="5dp"
+                android:text="@{viewModel.description}"
+                android:textColor="@{layoutViewModel.textColor}"/>
         </android.support.v4.widget.NestedScrollView>
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="top"
-            />
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>
