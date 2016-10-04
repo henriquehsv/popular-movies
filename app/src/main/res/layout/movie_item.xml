@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
-            type="br.com.example.android.popularmovies.viewmodel.MovieViewModel"/>
+            type="br.com.example.android.popularmovies.viewmodel.MovieViewModel" />
+
         <variable
             name="layoutViewModel"
-            type="br.com.example.android.popularmovies.viewmodel.MovieLayoutViewModel"/>
+            type="br.com.example.android.popularmovies.viewmodel.MovieLayoutViewModel" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -31,17 +33,18 @@
                 android:layout_height="@dimen/movie_poster_height"
                 android:scaleType="centerCrop"
                 android:transitionName="@string/movie_poster_transition"
-                app:loadImage="@{viewModel.posterUrl}"/>
+                app:loadImage="@{viewModel.posterUrl}" />
 
             <include
+                android:id="@+id/details"
                 layout="@layout/movie_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_below="@id/moviePoster"
                 android:elevation="20dp"
-                app:viewModel="@{viewModel}"
-                app:layoutViewModel="@{layoutViewModel}"/>
+                app:layoutViewModel="@{layoutViewModel}"
+                app:viewModel="@{viewModel}" />
 
         </RelativeLayout>
 

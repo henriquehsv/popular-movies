@@ -1,9 +1,16 @@
 package br.com.example.android.popularmovies.view;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.Collections;
@@ -41,12 +48,33 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        MovieItemBinding movieItemBinding = holder.binding;
+        final MovieItemBinding movieItemBinding = holder.binding;
 
         MovieViewModel movieViewModel = movieItemBinding.getViewModel();
 
         if (movieViewModel == null) {
             movieViewModel = new MovieViewModel();
+            movieViewModel.setMovieViewModelCallback(new MovieViewModel.MovieViewModelCallback() {
+                @Override
+                public void openMovieDetails(Movie movie) {
+                    Activity activity = (Activity) movieItemBinding.getRoot().getContext();
+
+                    Intent detailsIntent = new Intent();
+                    detailsIntent.setClass(activity, MovieDetailsActivity.class);
+                    detailsIntent.putExtra(MovieDetailsActivity.MOVIE_EXTRA, movie);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        String transitionName = activity.getString(R.string.movie_poster_transition);
+
+                        Bundle options = ActivityOptions.makeSceneTransitionAnimation(activity,
+                                movieItemBinding.moviePoster, transitionName
+                        ).toBundle();
+                        activity.startActivity(detailsIntent, options);
+                    } else {
+                        activity.startActivity(detailsIntent);
+                    }
+                }
+            });
         }
 
         movieViewModel.setMovie(movies.get(position));
