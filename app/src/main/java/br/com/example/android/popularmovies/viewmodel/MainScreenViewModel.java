@@ -3,7 +3,8 @@ package br.com.example.android.popularmovies.viewmodel;
 import java.util.List;
 
 import br.com.example.android.popularmovies.model.data.Movie;
-import br.com.example.android.popularmovies.model.networking.MoviesDBInfoFetcher;
+import br.com.example.android.popularmovies.model.data.OnMoviesFetchedListener;
+import br.com.example.android.popularmovies.model.networking.MovieFetcher;
 
 public class MainScreenViewModel {
     private final DataListener listener;
@@ -13,7 +14,12 @@ public class MainScreenViewModel {
     }
 
     public void onCreate() {
-        MoviesDBInfoFetcher.getInstance().getPopularMovies(new MoviesDBInfoFetcher.OnMoviesFetchedListener() {
+        /**
+         * We use flavors to determine which movie provider to use.
+         * mockData flavor will return a preset list of movies, whereas realData will recover
+         * movies from the movieDB API.
+         */
+        MovieFetcher.getInstance().fetchMovies(new OnMoviesFetchedListener() {
             @Override
             public void onMoviesFetched(List<Movie> movies) {
                 listener.updateMovies(movies);
