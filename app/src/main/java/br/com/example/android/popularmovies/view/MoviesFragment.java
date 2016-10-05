@@ -1,7 +1,6 @@
 package br.com.example.android.popularmovies.view;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -14,15 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.example.android.popularmovies.R;
 import br.com.example.android.popularmovies.databinding.FragmentMainBinding;
 import br.com.example.android.popularmovies.model.data.Movie;
 import br.com.example.android.popularmovies.viewmodel.MainScreenViewModel;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MoviesFragment extends Fragment implements MainScreenViewModel.DataListener {
     private MainScreenViewModel mainScreenViewModel;

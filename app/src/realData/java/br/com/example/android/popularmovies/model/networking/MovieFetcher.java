@@ -20,7 +20,6 @@ import java.util.List;
 
 import br.com.example.android.popularmovies.BuildConfig;
 import br.com.example.android.popularmovies.model.data.Movie;
-import br.com.example.android.popularmovies.model.data.OnMoviesFetchedListener;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
