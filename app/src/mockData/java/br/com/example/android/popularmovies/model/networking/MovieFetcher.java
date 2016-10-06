@@ -1,5 +1,7 @@
 package br.com.example.android.popularmovies.model.networking;
 
+import java.util.List;
+
 import br.com.example.android.popularmovies.model.data.Movie;
 import rx.Observable;
 import rx.Observer;
@@ -19,10 +21,10 @@ public class MovieFetcher {
         return instance;
     }
 
-    public void fetchMovies(Observer<Movie> observer) {
-        Observable<Movie> movieObservable = Observable.from(MockMovieData.getMovies())
-                                                      .subscribeOn(Schedulers.io())
-                                                      .observeOn(AndroidSchedulers.mainThread());
-        movieObservable.subscribe(observer);
+    public void fetchMovies(Observer<List<Movie>> observer) {
+        Observable.just(MockMovieData.getMovies())
+                  .subscribeOn(Schedulers.io())
+                  .observeOn(AndroidSchedulers.mainThread())
+                  .subscribe(observer);
     }
 }

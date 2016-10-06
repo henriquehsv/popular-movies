@@ -22,7 +22,7 @@ public class MainScreenViewModel {
          * mockData flavor will return a preset list of movies, whereas realData will recover
          * movies from the movieDB API.
          */
-        MovieFetcher.getInstance().fetchMovies(new Observer<Movie>() {
+        MovieFetcher.getInstance().fetchMovies(new Observer<List<Movie>>() {
             @Override
             public void onCompleted() {
                 listener.updateMovies(movies);
@@ -34,8 +34,8 @@ public class MainScreenViewModel {
             }
 
             @Override
-            public void onNext(Movie movie) {
-                movies.add(movie);
+            public void onNext(List<Movie> movieList) {
+                movies.addAll(movieList);
             }
         });
     }
