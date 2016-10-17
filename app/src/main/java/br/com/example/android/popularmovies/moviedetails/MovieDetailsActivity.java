@@ -1,19 +1,15 @@
-package br.com.example.android.popularmovies.view;
+package br.com.example.android.popularmovies.moviedetails;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 
 import br.com.example.android.popularmovies.R;
 import br.com.example.android.popularmovies.databinding.ActivityMovieDetailsBinding;
 import br.com.example.android.popularmovies.model.data.Movie;
-import br.com.example.android.popularmovies.viewmodel.MovieLayoutViewModel;
-import br.com.example.android.popularmovies.viewmodel.MovieViewModel;
+import br.com.example.android.popularmovies.layout.MovieLayoutViewModel;
+import br.com.example.android.popularmovies.movies.MovieViewModel;
 
 public class MovieDetailsActivity extends AppCompatActivity {
     public static final String MOVIE_EXTRA = "MOVIE_EXTRA";

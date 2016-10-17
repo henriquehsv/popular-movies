@@ -1,4 +1,4 @@
-package br.com.example.android.popularmovies.viewmodel;
+package br.com.example.android.popularmovies.movies;
 
 import java.util.ArrayList;
 import java.util.List;

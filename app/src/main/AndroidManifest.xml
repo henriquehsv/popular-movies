@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.MainActivity"
+            android:name=".movies.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -21,13 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.MovieDetailsActivity"
-            android:parentActivityName=".view.MainActivity"
+            android:name=".moviedetails.MovieDetailsActivity"
+            android:parentActivityName=".movies.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.example.android.popularmovies.view.MainActivity"/>
+                android:value="br.com.example.android.popularmovies.movies.MainActivity"/>
         </activity>
     </application>
 

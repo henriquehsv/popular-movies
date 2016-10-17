@@ -1,4 +1,4 @@
-package br.com.example.android.popularmovies.view;
+package br.com.example.android.popularmovies.movies;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
