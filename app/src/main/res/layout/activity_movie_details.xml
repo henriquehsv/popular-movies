@@ -6,11 +6,11 @@
 
         <variable
             name="viewModel"
-            type="br.com.example.android.popularmovies.viewmodel.MovieViewModel"/>
+            type="br.com.example.android.popularmovies.movies.MovieViewModel"/>
 
         <variable
             name="layoutViewModel"
-            type="br.com.example.android.popularmovies.viewmodel.MovieLayoutViewModel"/>
+            type="br.com.example.android.popularmovies.layout.MovieLayoutViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="br.com.example.android.popularmovies.view.MovieDetailsActivity">
+        tools:context="br.com.example.android.popularmovies.moviedetails.MovieDetailsActivity">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
@@ -34,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentScrim="?attr/colorPrimary"
+
                 app:expandedTitleGravity="top"
                 app:titleEnabled="false"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">

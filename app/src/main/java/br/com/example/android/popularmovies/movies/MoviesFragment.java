@@ -1,4 +1,4 @@
-package br.com.example.android.popularmovies.view;
+package br.com.example.android.popularmovies.movies;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import java.util.List;
 import br.com.example.android.popularmovies.R;
 import br.com.example.android.popularmovies.databinding.FragmentMainBinding;
 import br.com.example.android.popularmovies.model.data.Movie;
-import br.com.example.android.popularmovies.viewmodel.MainScreenViewModel;
 
 public class MoviesFragment extends Fragment implements MainScreenViewModel.DataListener {
     private MainScreenViewModel mainScreenViewModel;

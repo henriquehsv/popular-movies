@@ -8,10 +8,10 @@
 
         <variable
             name="viewModel"
-            type="br.com.example.android.popularmovies.viewmodel.MovieViewModel"/>
+            type="br.com.example.android.popularmovies.movies.MovieViewModel"/>
         <variable
             name="layoutViewModel"
-            type="br.com.example.android.popularmovies.viewmodel.MovieLayoutViewModel"/>
+            type="br.com.example.android.popularmovies.layout.MovieLayoutViewModel"/>
     </data>
 
     <RelativeLayout
