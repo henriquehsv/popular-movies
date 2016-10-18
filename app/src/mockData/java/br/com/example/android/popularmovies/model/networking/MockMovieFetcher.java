@@ -8,19 +8,7 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MovieFetcher {
-    private static MovieFetcher instance;
-
-    private MovieFetcher() {}
-
-    public static MovieFetcher getInstance() {
-        if (instance == null) {
-            instance = new MovieFetcher();
-        }
-
-        return instance;
-    }
-
+public class MockMovieFetcher implements MovieFetcher {
     public void fetchMovies(Observer<List<Movie>> observer) {
         Observable.just(MockMovieData.getMovies())
                   .subscribeOn(Schedulers.io())
